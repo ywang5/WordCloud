@@ -1,11 +1,18 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
-def default():
+@app.route('/', methods=['POST','GET'])
+def input():
 	return render_template('page.html')
 
-if __name__ == '__name__':
+@app.route('/output', methods=['POST','GET'])
+def output():
+	data = request.form['Input']
+	data = data.split()
+	print data
+	return "Second page"
+
+if __name__ == '__main__':
 	app.run(debug=True)

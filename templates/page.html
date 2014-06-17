@@ -4,12 +4,17 @@
 <head>
 	<title>Word Cloud</title>
 	<base target="_blank">
-	<script src="{{url_for('static', filename='myScript.js')}}"> </script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 
 </head>
 
 <header>
 	<h1>Word Cloud</h1>
+	<form id="user_input" method="post" action="{{url_for('output')}}">
+		<label>Please enter here: </label>
+		<textarea rows="4" cols="40" name="Input" form="user_input"></textarea>
+		<input type="submit">
+    </form>
 
 </header>
 
