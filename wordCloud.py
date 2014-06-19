@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from heapq import *
+import json
 
 app = Flask(__name__)
 
@@ -10,34 +11,33 @@ def input():
 
 @app.route('/output', methods=['POST','GET'])
 def output():
-	data = request.form['Input']
-	data = data.split()
+	rawdata = request.form['Input']
+	rawdata = rawdata.split()
 	dictionary = dict()
-	for word in data:
+	d=dict()
+	for word in rawdata:
 		if word in dictionary:
 			dictionary[word] = dictionary[word]-1
 		else:
 			dictionary[word] = -1
 
-	pairs = zip(dictionary.values(),dictionary.keys())
-	heap=[]
-	info=[]
-	for i in pairs:
-		heappush(heap,i)
-
-	if len(heap)<30:
-		info = heap
+	if len(dictionary) <= 30:
+		d = dictionary #d is a dictionary with keys being words, and values being negative counts
+	
 	else:
+		pairs = zip(dictionary.values(),dictionary.keys())
+		fullheap=[]
+		for i in pairs:
+			heappush(fullheap,i)
+	
+		dataheap=[]
 		for i in range(0,30):
-			heappush(info,heappop(heap))
+			heappush(dataheap,heappop(fullheap))
 
-	print info
+		for i in range(0,30):
+			d[dataheap[i][1]] = 0-dataheap[i][0]
 
-    #if <30, add all into a PQ
-    #otherwise, loop over and choose the most frequent 30 and add into PQ
-    #feed in the PQ
-    #Use PQ and JS to manipulate the font of the words
-	return render_template('output.html', dictionary=dictionary)
+	return render_template('output.html', d=d)
 
 if __name__ == '__main__':
 	app.run(debug=True)
