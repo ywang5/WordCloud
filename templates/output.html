@@ -5,14 +5,20 @@
 	<title>Word Cloud</title>
 	<base target="_blank">
 	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}"> -->
-	<script src="{{url_for('static', filename='myScript.js')}}?003"> </script>
+	<script src="{{url_for('static', filename='myScript.js')}}?0028"> </script>
 
 </head>
 
 <body>
-	<!-- problem with onload. Otherwise okay -->
-    <div onload='FirstFunction({{s}})'></div>
     <div id="words"></div>
+
+    <script type="text/javascript">
+    (function(){
+    	{% autoescape false %} var s = {{s}} {% endautoescape%};
+
+    	FirstFunction(s);
+    })();
+    </script>
 </body>
 
 </html>
