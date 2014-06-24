@@ -4,14 +4,14 @@
 <head>
 	<title>Word Cloud</title>
 	<base target="_blank">
-	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}"> -->
-	<script src="{{url_for('static', filename='myScript.js')}}?0028"> </script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}?0002">
+	<script src="{{url_for('static', filename='myScript.js')}}?0039"> </script>
 
 </head>
 
 <body>
     <div id="words"></div>
-
+    <div> {{s}} </div>
     <script type="text/javascript">
     (function(){
     	{% autoescape false %} var s = {{s}} {% endautoescape%};

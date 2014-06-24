@@ -1,22 +1,23 @@
 function FirstFunction(s) {
     var max = getMax(s);
     var min = getMin(s);
+    document.getElementById("words").innerHTML = "max: " + max + "; min: " + min;
     var x;
     var font;
+    var multiplier = 550/(max - min)
     for (x in s) {
     	//Create a seperate element div for each word, and assign it id
     	var newElement = document.createElement('div');
     	newElement.id = x;
+    	newElement.className = "content";
     	//Append the word to the element
     	var textnode=document.createTextNode(x);
     	newElement.appendChild(textnode);
     	//Output to HTML
     	document.body.appendChild(newElement);
     	//Set the font size
-    	/*
-    	NOW NEED TO CHANGE THE FONT DYNAMICALLY
-    	*/
-    	document.getElementById(x).style.fontSize = "200%";
+    	var size = s[x];
+    	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
     }
 }
 
