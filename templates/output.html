@@ -4,19 +4,20 @@
 <head>
 	<title>Word Cloud</title>
 	<base target="_blank">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}?0002">
-	<script src="{{url_for('static', filename='myScript.js')}}?0039"> </script>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}?0004">
+	<script src="{{url_for('static', filename='myScript.js')}}?0061"> </script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 </head>
 
-<body>
+<body id="body">
     <div id="words"></div>
-    <div> {{s}} </div>
     <script type="text/javascript">
     (function(){
     	{% autoescape false %} var s = {{s}} {% endautoescape%};
 
-    	FirstFunction(s);
+    	//FirstFunction(s);
+    	dd3(s);
     })();
     </script>
 </body>
