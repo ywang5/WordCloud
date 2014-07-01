@@ -1,25 +1,80 @@
-function FirstFunction(s) {
-    var max = getMax(s);
-    var min = getMin(s);
-    document.getElementById("words").innerHTML = "max: " + max + "; min: " + min;
-    var x;
-    var font;
-    var multiplier = 550/(max - min)
-    for (x in s) {
-    	//Create a seperate element div for each word, and assign it id
-    	var newElement = document.createElement('div');
-    	newElement.id = x;
-    	newElement.className = "content";
-    	//Append the word to the element
-    	var textnode=document.createTextNode(x);
-    	newElement.appendChild(textnode);
-    	//Output to HTML
-    	document.body.appendChild(newElement);
-    	//Set the font size
-    	var size = s[x];
-    	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
-    }
+function dd3(s) {
+	//Create a svg
+	var width = 800;
+	var height = 400;
+	var svg = d3.select("body")
+				.append("svg")
+				.attr("width", width)
+				.attr("height", height);
+
+	//Put information from the object into an array
+	var data = [];
+	for(var k in s) {
+		data.push({
+			"key": k,
+			"value": s[k],
+		});
+	}
+
+	//Create nodes that group circles and texts together
+	var nodes = svg.selectAll("g")
+					.data(data)
+					.enter()
+					.append("g")
+					.attr("class", "nodes")
+
+	var circles = nodes.append("circle");
+
+	var texts = nodes.append("text")
+
+	//Create a list of random numbers to position the circles and texts
+	randomx = [];
+	randomy = [];
+
+	for (var i=0; i<data.length; i++) {
+		randomx[i] = Math.random()*width;
+		randomy[i] = Math.random()*height;
+	}
+
+
+	//Create a scale to scale the font sizes
+	var textScale = d3.scale.linear()
+						.domain([getMin(s), getMax(s)])
+						.range([100, 600]);
+	//Scale for radius
+	var circleScale = d3.scale.linear()
+						.domain([getMin(s), getMax(s)])
+						.range([1, 200]);
+
+	//Set attributes to circles
+	circles.attr("cx", function(d, i){
+				return randomx[i]; //Need to take care of collisions
+			})								//The circle may fall off the svg
+			.attr("cy", function(d, i){
+				return randomy[i]; //Need to take care of collisions
+			})
+			.attr("r", function(d){
+				return circleScale(d.value);
+			})
+			.style("fill", "transparent")
+			.style("stroke", "blue")
+	
+	//Set attributes to texts
+	texts.attr("text-anchor", "middle")
+			.text(function(d) {
+				return d.key;
+			})
+			.attr("x", function(d, i) {
+				return randomx[i];
+			})
+			.attr("y", function(d, i) {
+				return randomy[i];
+			})
+			.attr("font-size", function(d) {
+				return textScale(d.value)+"%";
+			})
 }
+
 
 function getMax(s) {
 	var x;
@@ -43,40 +98,30 @@ function getMin(s) {
 	return min;
 }
 
-function dd3(s) {
-	document.getElementById("words").innerHTML += "1";
-	var width = 500;
-	var height = 500;
-	var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
 
-	var data = [];
-	// {"foo": 10, "bar": 30, ...}
-	// [{"x_axis": 10, "y_axis": 40, ...}, ]
-	//var dataKeys = keys(s);
-	//var dataValues = values(s);
-	var colorArray = ["red", "orange", "yellow", "green", "blue"];
-	for(var k in s) {
-		var word = k;
-		var count = s[k];
-		data.push({
-			"zz_axis": "X Position",
-			"y_axis": "Y Position",
-			"radius": 10*count,
-			"color": colorArray[Math.random()*colorArray.length]
-		});
-	}
 
-	document.getElementById("words").innerHTML += "2";
 
-	var circle = svg.selectAll("circle")
-						.data(data)
-						.enter()
-						.append("circle");
-
-	circle.attr("cx", Math.random()*450)
-			.attr("cy", Math.random()*450)
-			.attr("r", 50)
-			.style("fill", colorArray[Math.random()*colorArray.length]);	
-
-	document.getElementById("words").innerHTML += "3";
+/*
+function FirstFunction(s) {
+    var max = getMax(s);
+    var min = getMin(s);
+    document.getElementById("words").innerHTML = "max: " + max + "; min: " + min;
+    var x;
+    var font;
+    var multiplier = 550/(max - min)
+    for (x in s) {
+    	//Create a seperate element div for each word, and assign it id
+    	var newElement = document.createElement('div');
+    	newElement.id = x;
+    	newElement.className = "content";
+    	//Append the word to the element
+    	var textnode=document.createTextNode(x);
+    	newElement.appendChild(textnode);
+    	//Output to HTML
+    	document.body.appendChild(newElement);
+    	//Set the font size
+    	var size = s[x];
+    	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
+    }
 }
+*/

@@ -5,13 +5,12 @@
 	<title>Word Cloud</title>
 	<base target="_blank">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style2.css')}}?0004">
-	<script src="{{url_for('static', filename='myScript.js')}}?0061"> </script>
+	<script src="{{url_for('static', filename='myScript.js')}}?0086"> </script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 </head>
 
 <body id="body">
-    <div id="words"></div>
     <script type="text/javascript">
     (function(){
     	{% autoescape false %} var s = {{s}} {% endautoescape%};
