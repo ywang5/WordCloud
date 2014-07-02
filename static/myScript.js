@@ -73,6 +73,8 @@ function dd3(s) {
 			.attr("font-size", function(d) {
 				return textScale(d.value)+"%";
 			})
+
+	//maybe I should use rectangles instead of circles. Circles have too much empty space for each word
 }
 
 
@@ -100,20 +102,25 @@ function getMin(s) {
 
 
 
-
-/*
 function FirstFunction(s) {
     var max = getMax(s);
     var min = getMin(s);
-    document.getElementById("words").innerHTML = "max: " + max + "; min: " + min;
     var x;
     var font;
     var multiplier = 550/(max - min)
+    
+    var i = 0;
     for (x in s) {
+    	i++;
     	//Create a seperate element div for each word, and assign it id
     	var newElement = document.createElement('div');
     	newElement.id = x;
-    	newElement.className = "content";
+
+    	if (i%2 == 0) {
+    		newElement.className = "content1";
+    	} else {
+    		newElement.className = "content2";
+    	}
     	//Append the word to the element
     	var textnode=document.createTextNode(x);
     	newElement.appendChild(textnode);
@@ -123,5 +130,10 @@ function FirstFunction(s) {
     	var size = s[x];
     	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
     }
+
+    document.getElementById("cloud_stat").innerHTML ="Summary: " + "<br><br>" + "Maximum number of occurence: " + max + "<br>" + "Minimim number of occurence: " + min;
 }
-*/
+
+//Position of the summary needs to adjust according to the words
+//Aesthetics
+//When hover or click, something happens

@@ -1,2 +1,14 @@
-.content {display: inline;}
-div.content {margin: 5px;}
+div.content1 {margin: 3px 5px;
+			float: left;
+			text-transform: capitalize;}
+
+div.content2 {
+	margin: 3px 5px;
+	float: right;
+	text-transform: capitalize;
+}
+
+body {width: 1000px;}
+
+#cloud_stat {position: absolute;
+			top: 500px;}
