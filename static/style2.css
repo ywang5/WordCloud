@@ -8,7 +8,6 @@ div.content2 {
 	text-transform: capitalize;
 }
 
-body {width: 1000px;}
-
-#cloud_stat {position: absolute;
-			top: 500px;}
+#cloud_words {width: 1000px;
+			min-height: 100px;
+			overflow: hidden;}

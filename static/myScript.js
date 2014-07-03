@@ -125,15 +125,29 @@ function FirstFunction(s) {
     	var textnode=document.createTextNode(x);
     	newElement.appendChild(textnode);
     	//Output to HTML
-    	document.body.appendChild(newElement);
+    	var word_div = document.getElementById("cloud_words");
+    	word_div.appendChild(newElement);
     	//Set the font size
     	var size = s[x];
     	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
     }
+    aesthetics(s);
+}
 
+function summary(s) {
+    var max = getMax(s);
+    var min = getMin(s);
     document.getElementById("cloud_stat").innerHTML ="Summary: " + "<br><br>" + "Maximum number of occurence: " + max + "<br>" + "Minimim number of occurence: " + min;
 }
 
-//Position of the summary needs to adjust according to the words
-//Aesthetics
+function aesthetics(s) {
+	var colorArray = ["black", "blue", "gold", "green", "red"];
+	for (x in s) {
+		var number = Math.floor(colorArray.length*Math.random());
+		if (number >= colorArray.length) {number = number-1;}
+		document.getElementById(x).style.color = colorArray[number];
+	}
+}
+
 //When hover or click, something happens
+//Algorithm in the python code
