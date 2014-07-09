@@ -1,13 +1,22 @@
-div.content1 {margin: 3px 5px;
+div.content1 {margin-left: 3px;
+			margin-right: 3px;
+			margin-bottom: 0px;
 			float: left;
-			text-transform: capitalize;}
+			text-transform: capitalize;
+}
 
-div.content2 {
-	margin: 3px 5px;
+div.content2 {margin-left: 3px;
+	margin-right: 3px;
+	margin-bottom: 0px;
 	float: right;
 	text-transform: capitalize;
 }
 
-#cloud_words {width: 1000px;
-			min-height: 100px;
-			overflow: hidden;}
+#cloud_words {margin: auto;
+	overflow: visible;
+	display: table;
+}
+
+#cloud_stat {margin: auto;
+	text-align: center;
+}

@@ -77,7 +77,6 @@ function dd3(s) {
 	//maybe I should use rectangles instead of circles. Circles have too much empty space for each word
 }
 
-
 function getMax(s) {
 	var x;
 	var max = 1;
@@ -101,13 +100,10 @@ function getMin(s) {
 }
 
 
-
 function FirstFunction(s) {
     var max = getMax(s);
     var min = getMin(s);
     var x;
-    var font;
-    var multiplier = 550/(max - min)
     
     var i = 0;
     for (x in s) {
@@ -129,7 +125,10 @@ function FirstFunction(s) {
     	word_div.appendChild(newElement);
     	//Set the font size
     	var size = s[x];
-    	document.getElementById(x).style.fontSize = 100+(size - min)*multiplier+"%";
+    	var fontScale = d3.scale.pow().exponent(.5)
+    					.domain([min, max])
+    					.range([100,550])
+    	document.getElementById(x).style.fontSize = fontScale(size) + "%";
     }
     aesthetics(s);
 }
@@ -137,17 +136,31 @@ function FirstFunction(s) {
 function summary(s) {
     var max = getMax(s);
     var min = getMin(s);
-    document.getElementById("cloud_stat").innerHTML ="Summary: " + "<br><br>" + "Maximum number of occurence: " + max + "<br>" + "Minimim number of occurence: " + min;
+    document.getElementById("cloud_stat").innerHTML ="Summary: " + "<br><br><br>" + "Maximum number of occurence: " + max + "<br>" + "Minimim number of occurence: " + min;
 }
 
 function aesthetics(s) {
 	var colorArray = ["black", "blue", "gold", "green", "red"];
+	
+	var marginTopScale = d3.scale.pow().exponent(.5)
+						.domain([getMin(s), getMax(s)])
+						.range([0, -15]);
+
 	for (x in s) {
 		var number = Math.floor(colorArray.length*Math.random());
 		if (number >= colorArray.length) {number = number-1;}
 		document.getElementById(x).style.color = colorArray[number];
+		document.getElementById(x).style.marginTop = marginTopScale(s[x]) + "px";
 	}
+
+	var wrapper = document.getElementById("cloud_words");
+	var size = Object.keys(s).length;
+	var wrapperScale = d3.scale.pow().exponent(1)
+						.domain([0, 50])
+						.range([0, 800]);
+	wrapper.style.width = wrapperScale(size) + "px";
 }
 
-//When hover or click, something happens
 //Algorithm in the python code
+//Better margin top spacing
+//When hover or click, something happens
