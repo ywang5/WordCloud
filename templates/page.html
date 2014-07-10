@@ -8,21 +8,18 @@
 
 </head>
 
-<header>
-	<h1>Word Cloud</h1>
-	<form id="user_input" method="post" action="{{url_for('output')}}">
-		<label>Please enter here: </label>
-		<textarea rows="4" cols="40" name="Input" form="user_input"></textarea>
-		<input type="submit">
-    </form>
-
-</header>
-
 <body>
 
+	<h1>Word Cloud</h1>
+	<br><br><br>
+	<form id="user_input" method="post" action="{{url_for('output')}}">
+		<label>Please enter here: </label>
+		<br>
+		<textarea rows="10" cols="80" name="Input" form="user_input"></textarea>
+		<br>
+		<input id="submit" type="submit">
+    </form>
+
 </body>
-
-
-
 
 </html>
